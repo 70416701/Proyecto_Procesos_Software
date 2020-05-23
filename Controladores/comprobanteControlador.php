@@ -1,39 +1,45 @@
 <?php 
 	namespace Controladores;
 
-	use Modelo\tecnicoModelo as Tecnico;
+	use Modelo\comprobanteModelo as Comprobante;
 
-	class tecnicoControlador
+	class comprobanteControlador
 	{
-		private $tecnico;
+		private $comprobante;
 
 		public function __construct()
 		{
-			$this->tecnico = new Tecnico();
+			$this->comprobante = new Comprobante();
 		}
 
 		public function index()
 		{
 			session_start();
-			$datos = $this->tecnico->listar();
+			$datos = $this->comprobante->listar();
 			return $datos;
 		}
 
-		public function registrarTecnicoVista()
+		public function registrarComprobanteVista()
 		{	
 			session_start();
 			if ($_POST) {
-				$this->tecnico->set("nombre",$_POST['nombre']);
-				$this->tecnico->set("apellido",$_POST['apellido']);
-				$this->tecnico->set("dni",$_POST['dni']);
-				$this->tecnico->set("direccion",$_POST['direccion']);
-				$this->tecnico->set("celular",$_POST['celular']);
-				$this->tecnico->set("email",$_POST['email']);
-				$this->tecnico->set("usuario",$_POST['usuario']);
-				$this->tecnico->set("contrasenia",$_POST['contrasenia']);
-				$this->tecnico->set("cargo",$_POST['cargo']);
-				$this->tecnico->add();
-				header ("Location: ".URL."Tecnico");
+				$this->comprobante->set("numOrden",$_POST['numOrden']);
+				$datos = $this->comprobante->validate_orden();
+				if ($datos = 0) {
+					header ("Location: ".URL."Comprobante/registrarComprobanteVista");
+				} else {
+					$datos = $this->comprobante->obtener_idorden();
+					$idOrden = $datos['idOrden'];
+					
+					$this->comprobante->set("detalle",$_POST['detalle']);
+					$this->comprobante->set("costoTotal",$_POST['costoTotal']);
+					$this->comprobante->set("idOrden",$idOrden);
+					$this->comprobante->add();
+					
+					header ("Location: ".URL."Comprobante/imprimirComprobanteVista/".$idOrden);
+
+				}
+				
 			}		
 		}
 
@@ -67,11 +73,10 @@
 
 		}
 
-		public function eliminarTecnicoVista($idTecnico)
-		{
-
-			$this->tecnico->set("idTecnico",$idTecnico);
-			$this->tecnico->delete();
-			header ("Location: ".URL."Tecnico");
+		public function imprimirComprobanteVista($idOrden) {
+			session_start();
+			$this->comprobante->set("idOrden",$idOrden);
+			$datos = $this->comprobante->impresion();
+			return $datos;
 		}
 	}

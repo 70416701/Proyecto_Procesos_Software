@@ -51,13 +51,23 @@ class productoModelo
 
 	 public function edit()
 	 {
-	 	$sql = "UPDATE Productos SET tipo='{$this->tipo}', marca='{$this->marca}', modelo='{$this->modelo}', serie='{$this->serie}', precio='{$this->precio}', descProb='{$this->descProb}', descTrab='{$this->descTrab}', Estado='{$this->Estado}', idSolucion='{$this->idSolucion}', idOrden='{$this->idOrden}' WHERE idProducto = '{$this->idProducto}'";
+	 	$sql = "UPDATE Productos SET tipo='{$this->tipo}', marca='{$this->marca}', modelo='{$this->modelo}', serie='{$this->serie}', 
+	 			precio='{$this->precio}', descProb='{$this->descProb}', descTrab='{$this->descTrab}' WHERE idProducto = '{$this->idProducto}'";
+	 	$this->con->consultaSimple($sql);
+	 }
+
+	 public function edit_tec()
+	 {
+	 	$sql = "UPDATE Productos SET tipo='{$this->tipo}', marca='{$this->marca}', modelo='{$this->modelo}', serie='{$this->serie}', 
+	 			precio='{$this->precio}', descProb='{$this->descProb}', descTrab='{$this->descTrab}', Estado = '{$this->Estado}' WHERE idProducto = '{$this->idProducto}'";
 	 	$this->con->consultaSimple($sql);
 	 }
 
 	 public function view()
 	 {
-	 	$sql = "SELECT * FROM Productos WHERE idProducto = '{$this->idProducto}'";
+	 	$sql = "SELECT cli.nombres,cli.apellidos,cli.dni,cli.direccion,cli.celular,cli.email,tec.nombres AS tecnombres,tec.apellidos AS tecapellidos,
+	 			ord.numOrden,ord.fecha,ord.precioInicial,prod.tipo,prod.marca,prod.modelo,prod.serie,prod.descProb,prod.descTrab,prod.Estado,prod.precio FROM clientes AS cli INNER JOIN ordenes AS ord ON cli.idCliente = ord.idCliente 
+				INNER JOIN tecnicos AS tec ON tec.idTecnico = ord.idTecnico INNER JOIN productos AS prod ON prod.idOrden = ord.idOrden WHERE prod.idProducto= '{$this->idProducto}'";
 	 	$datos = $this->con->consultaRetorno($sql);
 	 	$row = mysqli_fetch_assoc($datos);
 	 	return $row;
@@ -67,5 +77,14 @@ class productoModelo
 	 	$sql = "SELECT * FROM Productos WHERE idOrden = '{$this->idOrden}'";
 	 	$datos = $this->con->consultaRetorno($sql);
 	 	return $datos;
+	 }
+
+	 public function view_inner()
+	 {
+	 	$sql = "SELECT ord.idOrden,ord.numOrden,prod.idProducto,prod.tipo,prod.marca,prod.modelo,prod.serie,prod.precio,prod.descProb,prod.descTrab,prod.Estado,tec.nombres,tec.apellidos FROM tecnicos AS tec INNER JOIN ordenes AS ord ON tec.idTecnico = ord.idTecnico INNER JOIN productos AS prod
+				ON prod.idOrden = ord.idOrden WHERE prod.idProducto = '{$this->idProducto}'";
+	 	$datos = $this->con->consultaRetorno($sql);
+	 	$row = mysqli_fetch_assoc($datos);
+	 	return $row;
 	 }
 }

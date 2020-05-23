@@ -6,52 +6,29 @@
     </div>
 <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                      Técnicos
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Listado</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico/registrarTecnicoVista" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Registrar</p>
-                      </a>
-                    </li>             
-                  </ul>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Ordenes de Servicio
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="http://localhost:8080/soft_sertec/Recepcion" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Seguimiento</p>
+                </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                    Ordenes de Servicio
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
+                <a href="http://localhost:8080/soft_sertec/Recepcion/registrarRecepcionVista" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registro</p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Seguimiento</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden/registrarOrdServVista" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Registro</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
+            </ul>
+          </li>
         </ul>
       </nav>
   </aside>
@@ -98,7 +75,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputName">Precio total estimado</label>
-                  <input type="number" step="0.01" min="1" max="5000" name="precioInicial" class="form-control">
+                  <input type="text" name="precioInicial" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="inputName">Nombres</label>
@@ -232,7 +209,7 @@
       <div class="row">
         <div class="col-12">
           <a href="#" class="btn btn-secondary">Cancel</a>
-          <a class="btn btn-success float-right" href="<?php echo URL; ?>Orden/imprimirOrdServVista/<?php echo @$id;?>">Mostrar resultado</a><?php }?>
+          <a class="btn btn-success float-right" href="<?php echo URL; ?>Recepcion/imprimirRecepcionVista/<?php echo @$id;?>">Mostrar resultado</a><?php }?>
         </div>
       </div>
     </section>

@@ -62,7 +62,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="http://localhost:8080/soft_sertec/Comprobante" class="nav-link">
+              <a href="http://localhost:8080/soft_sertec/Comprobante/registrarComprobanteVista" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Registro</p>
               </a>
@@ -85,7 +85,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Técnicos</h1>
+          <h1>Comprobante</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">

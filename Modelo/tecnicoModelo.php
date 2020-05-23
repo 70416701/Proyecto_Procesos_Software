@@ -11,6 +11,7 @@ class tecnicoModelo
 	 private $email;
 	 private $usuario;
 	 private $contrasenia;
+	 private $cargo;
 	 private $con;
 
 	 public function __construct()
@@ -37,8 +38,8 @@ class tecnicoModelo
 
 	 public function add()
 	 {
-	 	$sql = "INSERT INTO Tecnicos (idTecnico,nombres,apellidos,dni,direccion,celular,email,usuario,contrasenia) 
-	 			VALUES (null,'{$this->nombre}','{$this->apellido}','{$this->dni}','{$this->direccion}','{$this->celular}','{$this->email}','{$this->usuario}','{$this->contrasenia}')";
+	 	$sql = "INSERT INTO Tecnicos (idTecnico,nombres,apellidos,dni,direccion,celular,email,usuario,contrasenia,cargo) 
+	 			VALUES (null,'{$this->nombre}','{$this->apellido}','{$this->dni}','{$this->direccion}','{$this->celular}','{$this->email}','{$this->usuario}','{$this->contrasenia}','{$this->cargo}')";
 	 	$this->con->consultaSimple($sql);
 	 }
 

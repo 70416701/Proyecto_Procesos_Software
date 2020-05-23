@@ -25,27 +25,26 @@ class ordenModelo
 
 	 public function listar()
 	 {
-	 	$sql = "SELECT * FROM Ordenes";
+	 	$sql = "CALL SP_A_ORDENES()";
 	 	$datos = $this->con->consultaRetorno($sql);
 	 	return $datos;
 	 }
 
 	 public function add()
 	 {
-	 	 $query = "INSERT INTO Ordenes (idOrden,numOrden,precioInicial,fecha,idTecnico,idCliente) VALUES (null,'{$this->numOrden}','{$this->precioInicial}',NOW(),'{$this->idTecnico}','{$this->idCliente}')";
+	 	 $query = "CALL SP_C_ORDENES({$this->idOrden})";
 	 	 $this->con->consultaSimple($query);
 	 }
 
 	 public function delete()
 	 {
-	 	$sql = "DELETE FROM Ordenes where idOrden = '{$this->idOrden}'";
+	 	$sql = "CALL SP_E_ORDENES({$this->idOrden})";
 	 	$this->con->consultaSimple($sql);
 	 }
 
 	 public function edit()
 	 {
-	 	$sql = "UPDATE Ordenes SET numOrden = '{$this->numOrden}', costoInicial = '{$this->costoInicial}', idTecnico = '{$this->idTecnico}', 
-	 	idCliente = '{$this->idCliente}' WHERE idOrden = '{$this->idOrden}'";
+	 	$sql = "CALL SP_M_ORDENES({$this->idOrden})";
 	 	$this->con->consultaSimple($sql);
 	 }
 
@@ -65,5 +64,32 @@ class ordenModelo
                	$j = $fila['idOrden'];
             }
         return $j;
+	 }
+	 
+	 public function impresion(){
+	 	$sql = "SELECT cli.nombres,cli.apellidos,cli.direccion,cli.celular,cli.email,tec.nombres AS tecnombres,tec.apellidos AS tecapellidos,
+				ord.numOrden,ord.fecha,ord.precioInicial,prod.tipo,prod.serie,prod.descTrab,prod.descProb,prod.precio FROM clientes AS cli INNER JOIN ordenes AS ord ON cli.idCliente = ord.idCliente 
+				INNER JOIN tecnicos AS tec ON tec.idTecnico = ord.idTecnico INNER JOIN productos AS prod ON prod.idOrden = ord.idOrden WHERE ord.idOrden = '{$this->idOrden}'";
+	 	$datos = $this->con->consultaRetorno($sql);
+	 	return $datos;
+	 }
+
+	 public function ver_todo(){
+	 	$sql = "SELECT cli.nombres,cli.apellidos,cli.direccion,cli.celular,cli.email,tec.nombres AS tecnombres,tec.apellidos AS tecapellidos,
+				ord.numOrden,ord.fecha,ord.precioInicial,prod.tipo,prod.serie,prod.descTrab,prod.precio FROM clientes AS cli INNER JOIN ordenes AS ord ON cli.idCliente = ord.idCliente 
+				INNER JOIN tecnicos AS tec ON tec.idTecnico = ord.idTecnico INNER JOIN productos AS prod ON prod.idOrden = ord.idOrden WHERE ord.idOrden = '{$this->idOrden}'";
+	 	$datos = $this->con->consultaRetorno($sql);
+	 	$row = mysqli_fetch_assoc($datos);
+	 	return $row;
+	 }
+
+	  public function listar_por_tecnico()
+	 {
+	 	$sql = "SELECT ord.idOrden,ord.numOrden,prod.idProducto,prod.tipo,prod.marca,prod.descTrab,prod.Estado,tec.idTecnico,
+	 			tec.nombres,tec.apellidos FROM tecnicos AS tec INNER JOIN ordenes AS ord ON tec.idTecnico = ord.idTecnico 
+	 			INNER JOIN productos AS prod
+				ON prod.idOrden = ord.idOrden WHERE tec.idTecnico = '{$this->idTecnico}' order by ord.numOrden DESC";
+	 	$datos = $this->con->consultaRetorno($sql);
+	 	return $datos;
 	 }
 }

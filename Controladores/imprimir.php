@@ -1,0 +1,30 @@
+<?php namespace Controladores;
+$nombres ="";
+$apellidos ="";
+$direccion ="";
+$celular ="";
+$email ="";
+$tecnombres ="";
+$tecapellidos ="";
+$numOrden ="";
+$fecha ="";
+$precioInicial =""; 
+$array = array();
+$i = 0;
+while ($fila = mysqli_fetch_array($datos)) {
+  $nombres =$fila["nombres"];
+  $apellidos =$fila["apellidos"];
+  $direccion =$fila["direccion"];
+  $celular =$fila["celular"];
+  $email =$fila["email"];
+  $tecnombres =$fila["tecnombres"];
+  $tecapellidos =$fila["tecapellidos"];
+  $numOrden =$fila["numOrden"];
+  $fecha =$fila["fecha"];
+  $precioInicial =$fila["precioInicial"];
+  $array["tipo".$i] = $fila["tipo"];
+  $array["serie".$i] =$fila["serie"];
+  $array["descProb".$i] =$fila["descProb"];
+  $array["precio".$i] =$fila["precio"];
+  $i++;
+}

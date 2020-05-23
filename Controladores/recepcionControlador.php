@@ -6,7 +6,7 @@
 	use Modelo\tecnicoModelo as Tecnico;
 	use Modelo\productoModelo as Producto;
 
-	class ordenControlador
+	class recepcionControlador
 	{
 		private $producto;
 		private $orden;
@@ -28,7 +28,7 @@
 			return $datos;
 		}
 
-		 public function registrarOrdServVista()
+		 public function registrarRecepcionVista()
 		 {
 		 	session_start();
 			switch (isset($_POST)) {
@@ -71,9 +71,9 @@
 					
 		 }
 
-		public function editarOrdServVista($idOrden)
+		public function editarRecepcionVista($idOrden)
 		{
-			session_start();			
+			session_start();
 			if (!$_POST) {
 				$this->orden->set("idOrden",$idOrden);
 				$datos = $this->orden->view();
@@ -92,25 +92,24 @@
 			}
 		}
 
-		public function verOrdServVista($idOrden)
+		public function verRecepcionVista($idOrden)
 		{
-			session_start();
+
 			$this->orden->set("idOrden",$idOrden);
 			$datos = $this->orden->ver_todo();
 			return $datos;
 
 		}
 
-		public function eliminarOrdServVista($idOrden)
+		public function eliminarRecepcionVista($idOrden)
 		{
 
 			$this->orden->set("idOrden",$idOrden);
 			$this->orden->delete();
-			header ("Location: ".URL."Orden");
+			
 		}
 
-		public function imprimirOrdServVista($idOrden) {
-			session_start();
+		public function imprimirRecepcionVista($idOrden) {
 			$this->orden->set("idOrden",$idOrden);
 			$datos = $this->orden->impresion();
 			return $datos;
