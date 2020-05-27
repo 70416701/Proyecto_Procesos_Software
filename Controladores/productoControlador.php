@@ -99,6 +99,15 @@
 			return $datos;
 
 		}
+		public function verProductoRecepcionVista($idProducto)
+		{
+			session_start();
+			$this->producto->set("idProducto",$idProducto);
+			$datos = $this->producto->view();
+			return $datos;
+
+		}
+
 
 		public function eliminarProductoVista($idProducto)
 		{

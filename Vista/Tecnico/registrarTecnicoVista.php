@@ -1,60 +1,4 @@
-<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info">
-        <a href="#" class="d-block"><span class="brand-text font-weight-light"> <?php echo $_SESSION['usuario'];?> </span></a>
-        <a href="http://localhost:8080/soft_sertec/Login/logout" class="d-block"><span class="brand-text font-weight-light">Cerrar Sesión</span></a>
-      </div>
-    </div>
-<nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                      Técnicos
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Listado</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico/registrarTecnicoVista" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Registrar</p>
-                      </a>
-                    </li>             
-                  </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                    Ordenes de Servicio
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Seguimiento</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden/registrarOrdServVista" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Registro</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-        </ul>
-      </nav>
-  </aside>
+<?php include_once "./Vista/body.php";?>
 <div class="content-wrapper">
 	<section class="content-header">
 	  <div class="container-fluid">
@@ -78,23 +22,26 @@
 		  </div>
 		  <!-- /.card-header -->
 		  <!-- form start -->
-		  <form  action="" method="POST">
+		  <form  action="" method="POST" onsubmit="alert('Técnico registrado exitosamente!')">
 		    <div class="card-body">
 		   	  <div class="form-group">
 		   	    <label for="exampleInputEmail1">Cargo</label>
-		   	    <input type="text" required pattern="^([A-Za-z ]){3,150}$" class="form-control" name="cargo">
+		   	    <select name="cargo" class="form-control select2" style="width: 100%;">
+                    <option value="Tecnico">Técnico</option>
+                    <option value="Recepcionista">Recepcionista</option>
+                </select>
 		   	  </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">Nombres</label>
-		        <input type="text" required pattern="^([A-Za-z ]){3,150}$" class="form-control" name="nombre">
+		        <input type="text" required pattern="^([A-Za-z ]){3,45}$" class="form-control" name="nombre">
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">Apellidos</label>
-		        <input type="text" required pattern="^([A-Za-z ]){3,150}$" class="form-control" name="apellido">
+		        <input type="text" required pattern="^([A-Za-z ]){3,45}$" class="form-control" name="apellido">
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">DNI</label>
-		        <input type="text" class="form-control" name="dni">
+		        <input type="text" required pattern="^([0-9]){8,8}$" class="form-control" name="dni">
 		      </div>
 		      <div class="form-group">
 		        <label for="exampleInputEmail1">Dirección</label>

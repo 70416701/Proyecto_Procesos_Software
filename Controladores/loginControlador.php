@@ -28,12 +28,12 @@ class loginControlador {
 							header ("Location: ".URL."Recepcion");
 							break;
 						case 'Tecnico':
-							
-							header ("Location: ".URL."Produccion/index/".$datos['idTecnico']);
+							$_SESSION['idtec'] = $datos['idTecnico'];
+							header ("Location: ".URL."Produccion/index/".$_SESSION['idtec']);
 							break;
 						default:
 							session_destroy();
-							echo "no se encontro al usuario";
+							echo "Usuario o contraseña incorrecto";
 							break;
 					}	
 			

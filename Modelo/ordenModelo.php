@@ -32,7 +32,7 @@ class ordenModelo
 
 	 public function add()
 	 {
-	 	 $query = "CALL SP_C_ORDENES({$this->idOrden})";
+	 	 $query = "CALL SP_C_ORDENES('{$this->numOrden}','{$this->precioInicial}')";
 	 	 $this->con->consultaSimple($query);
 	 }
 

@@ -1,60 +1,4 @@
-<div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info">
-        <a href="#" class="d-block"><span class="brand-text font-weight-light"> <?php echo $_SESSION['usuario'];?> </span></a>
-        <a href="http://localhost:8080/soft_sertec/Login/logout" class="d-block"><span class="brand-text font-weight-light">Cerrar Sesión</span></a>
-      </div>
-    </div>
-<nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                      Técnicos
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Listado</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="http://localhost:8080/soft_sertec/Tecnico/registrarTecnicoVista" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Registrar</p>
-                      </a>
-                    </li>             
-                  </ul>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                    Ordenes de Servicio
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Seguimiento</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="http://localhost:8080/soft_sertec/Orden/registrarOrdServVista" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Registro</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-        </ul>
-      </nav>
-  </aside>
+<?php include_once "./Vista/body.php";?>
 <div class="content-wrapper">
     <section class="content-header">
       <div class="container-fluid">
@@ -82,7 +26,7 @@
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
-            <form  action="" method="POST">
+            <form  action="" method="POST" onsubmit="alert('Orden de servicio y Cliente registrados exitosamente!')">
               <div class="card-body">
                 <div class="form-group">
                   <label for="inputName">Número de orden</label>
@@ -102,7 +46,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputName">Nombres</label>
-                  <input type="text" name="nombre" class="form-control">
+                  <input type="text" required pattern="^([A-Za-z ]){3,45}$" name="nombre" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="inputName">Apellidos</label>
@@ -140,11 +84,11 @@
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
-            <form  action="" method="POST">
+            <form  action="" method="POST" onsubmit="alert('Producto registrado exitosamente!')">
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Producto</label>
-                <input type="text" name="tipo" class="form-control">
+                <input type="text" required pattern="^([A-Za-z ]){3,45}$" name="tipo" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputName">Marca</label>
@@ -195,7 +139,7 @@
                      <table class="table m-0">
                        <thead>
                        <tr>
-                         <th>Orden</th>
+                         <th>#</th>
                          <th>Producto</th>
                          <th>Marca</th>
                          <th>Modelo</th>
@@ -207,7 +151,7 @@
                        <tbody>
                        <?php if (@$_POST) { $id = 0; while (@$row = mysqli_fetch_array(@$datos)) {?>
                        <tr>
-                         <td><?php echo @$row['idOrden']; $id = @$row['idOrden'];?></td>
+                         <td>1<?php $id = @$row['idOrden'];?></td>
                          <td><?php echo @$row['tipo']; ?></td>
                          <td><?php echo @$row['marca']; ?></td>
                          <td><?php echo @$row['modelo']; ?></td>

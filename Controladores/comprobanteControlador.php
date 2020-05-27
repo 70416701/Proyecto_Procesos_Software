@@ -43,6 +43,30 @@
 			}		
 		}
 
+		public function registrarComprobanteRecepcionVista()
+		{	
+			session_start();
+			if ($_POST) {
+				$this->comprobante->set("numOrden",$_POST['numOrden']);
+				$datos = $this->comprobante->validate_orden();
+				if ($datos = 0) {
+					header ("Location: ".URL."Comprobante/registrarComprobanteRecepcionVista");
+				} else {
+					$datos = $this->comprobante->obtener_idorden();
+					$idOrden = $datos['idOrden'];
+					
+					$this->comprobante->set("detalle",$_POST['detalle']);
+					$this->comprobante->set("costoTotal",$_POST['costoTotal']);
+					$this->comprobante->set("idOrden",$idOrden);
+					$this->comprobante->add();
+					
+					header ("Location: ".URL."Comprobante/imprimirComprobanteRecepcionVista/".$idOrden);
+
+				}
+				
+			}		
+		}
+
 		public function editarTecnicoVista($idTecnico)
 		{
 			session_start();
@@ -74,6 +98,13 @@
 		}
 
 		public function imprimirComprobanteVista($idOrden) {
+			session_start();
+			$this->comprobante->set("idOrden",$idOrden);
+			$datos = $this->comprobante->impresion();
+			return $datos;
+		}
+
+		public function imprimirComprobanteRecepcionVista($idOrden) {
 			session_start();
 			$this->comprobante->set("idOrden",$idOrden);
 			$datos = $this->comprobante->impresion();

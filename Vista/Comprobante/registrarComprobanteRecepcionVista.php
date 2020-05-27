@@ -1,4 +1,4 @@
-<?php include_once "./Vista/body.php";?>
+<?php include_once "./Vista/Recepcion/body.php";?>
 <div class="content-wrapper">
 	<section class="content-header">
 	  <div class="container-fluid">
