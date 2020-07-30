@@ -32,20 +32,26 @@ class ordenModelo
 
 	 public function add()
 	 {
-	 	 $query = "CALL SP_C_ORDENES('{$this->numOrden}','{$this->precioInicial}')";
-	 	 $this->con->consultaSimple($query);
+	 	 $query = "CALL SP_C_ORDENES(?,?)";
+	 	 $sentencia = $this->con->prepare($query);
+	 	 $sentencia->bind_param('ii',$this->numOrden,$this->precioInicial);
+	 	 $this->con->execute();
 	 }
 
 	 public function delete()
 	 {
-	 	$sql = "CALL SP_E_ORDENES({$this->idOrden})";
-	 	$this->con->consultaSimple($sql);
+	 	$sql = "CALL SP_E_ORDENES(?)";
+	 	$sentencia = $this->con->prepare($query);
+	 	$sentencia->bind_param('i',$this->idOrden);
+	 	$this->con->execute();	 	
 	 }
 
 	 public function edit()
 	 {
-	 	$sql = "CALL SP_M_ORDENES({$this->idOrden})";
-	 	$this->con->consultaSimple($sql);
+	 	$sql = "CALL SP_M_ORDENES(?))";
+	 	$sentencia = $this->con->prepare($query);
+	 	$sentencia->bind_param('i',$this->idOrden);
+	 	$this->con->execute();
 	 }
 
 	 public function view()
